@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id             Int                  @id @default(autoincrement())
+  name           String
+  description    String?
+  address        String
+  latitude       Float
+  longitude      Float
+  average_price  Int
+  price_category String
+  rating         Float                @default(0)
+  phone          String?
+  opening_hours  String?
+  created_at     DateTime             @default(now())
+  updated_at     DateTime             @updatedAt
+  images         RestaurantImage[]
+  categories     RestaurantCategory[]
+
+  @@index([price_category])
+  @@index([latitude, longitude])
+}
+
+model RestaurantImage {
+  id            Int        @id @default(autoincrement())
+  restaurant_id Int
+  image_url     String
+  is_primary    Boolean    @default(false)
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id], onDelete: Cascade)
+
+  @@index([restaurant_id])
+}
+
+model FoodCategory {
+  id          Int                  @id @default(autoincrement())
+  name        String
+  description String?
+  restaurants RestaurantCategory[]
+}
+
+model RestaurantCategory {
+  id            Int          @id @default(autoincrement())
+  restaurant_id Int
+  category_id   Int
+  restaurant    Restaurant   @relation(fields: [restaurant_id], references: [id], onDelete: Cascade)
+  category      FoodCategory @relation(fields: [category_id], references: [id], onDelete: Cascade)
+
+  @@unique([restaurant_id, category_id])
+  @@index([restaurant_id])
+  @@index([category_id])
+}

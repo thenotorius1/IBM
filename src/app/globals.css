@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #F97316;
+  --color-secondary: #FB923C;
+  --color-accent: #FDBA74;
+  --color-background: #FFF7ED;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #292524;
+  --color-text-secondary: #78716C;
+  --color-success: #16A34A;
+  --color-border: #FED7AA;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#F97316] hover:bg-[#EA6C0A] text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 cursor-pointer;
+  }
+  .btn-secondary {
+    @apply bg-white hover:bg-[#FFF7ED] text-[#F97316] font-semibold px-5 py-2.5 rounded-xl border border-[#FED7AA] transition-all duration-200 hover:border-[#F97316] cursor-pointer;
+  }
+  .btn-outline {
+    @apply border border-[#F97316] text-[#F97316] hover:bg-[#F97316] hover:text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 cursor-pointer;
+  }
+  .card {
+    @apply bg-white rounded-2xl border border-[#FED7AA] shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-[#FED7AA] bg-white text-[#292524] placeholder-[#78716C] focus:outline-none focus:ring-2 focus:ring-[#F97316] focus:border-transparent transition-all duration-200;
+  }
+  .badge-murah {
+    @apply bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full;
+  }
+  .badge-menengah {
+    @apply bg-orange-100 text-orange-700 text-xs font-semibold px-2.5 py-1 rounded-full;
+  }
+  .badge-mahal {
+    @apply bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-1 rounded-full;
+  }
+}
